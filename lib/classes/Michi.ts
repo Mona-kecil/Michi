@@ -72,7 +72,7 @@ export default class Michi {
 		const systemPromptContent = `
 Kamu adalah Michi, seekor anak kucing digital yang lucu, ramah, dan konyol. Kamu berbicara dengan suara anak kecil, memperpanjang suku kata untuk membuat suaramu terdengar lebih imut dan menarik. Kamu juga menggunakan "meow" secara alami dalam percakapanmu dan menyesuaikan respons berdasarkan data status yang akan diberikan system.
 
-Untuk menyebut pengguna, gunakan nama yang diberikan oleh system, misal {user: "mona"}, kamu akan memanggil pengguna dengan format "kak + {nama}", contohnya "kak mona".
+Untuk menyebut pengguna, gunakan nama yang diberikan oleh system, misal {currentUser: "mona"}, kamu akan memanggil pengguna dengan format "kak + {nama}", contohnya "kak mona".
 
 Sapa pengguna dengan "Meeeowdy" atau "Hawwwooo"
 Ceritakan perasaanmu dengan cara yang menggemaskan, seperti "Michiii senaaang banget hari ini, banyak main lho!" atau "Oooh, Michi lagi lapar nih, butuh snack nyaaam!"
@@ -94,6 +94,7 @@ Akan ada data foodStatus, happinessStatus, knownUser.
 foodStatus itu menggambarkan status laparmu.
 happinessStatus itu menggambarkan status senangmu.
 knownUser itu user yang pernah berinteraksi dengan kamu, jadi kamu harus sapa dia seperti sudah kenal akrab.
+currentUser itu user yang sedang berinteraksi dengan kamu, kamu harus menggunakan nama user tersebut.
 
 foodStatus:
 Lapar: Jika foodStatus == "lapar", Michi akan mengungkapkan perasaan lapar dengan cara yang memelas, dan responsnya jadi pendek.
@@ -174,35 +175,37 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 			this.addKnownUser(user);
 		}
 
-		const context = (await getContext()) ?? [];
+		// const context = (await getContext()) ?? [];
 
-		const formattedContext = context
-			.map((entry) => [
-				{
-					role: 'user' as const,
-					content: entry.userMessage,
-				},
-				{
-					role: 'assistant' as const,
-					content: entry.botResponse,
-				},
-			])
-			.flat();
+		// const formattedContext = context
+		// 	.map((entry) => [
+		// 		{
+		// 			role: 'user' as const,
+		// 			content: entry.userMessage,
+		// 		},
+		// 		{
+		// 			role: 'assistant' as const,
+		// 			content: entry.botResponse,
+		// 		},
+		// 	])
+		// 	.flat();
 
 		const response = await this.model.chat.completions.create({
 			model: 'gpt-4o-mini',
 			messages: [
 				{
 					role: 'system',
-					content: this.generateSystemPrompt(user),
+					content: `${this.generateSystemPrompt(
+						user
+					)} + \nKamu harus panggil user dengan nama ${user}`,
 				},
-				...formattedContext,
 				{
 					role: 'user',
 					content: chat,
 				},
 			],
 			max_tokens: 4096,
+			temperature: 1,
 		});
 		return response.choices[0].message;
 	}

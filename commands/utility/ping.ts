@@ -9,11 +9,13 @@ export default {
 		const latency = Date.now() - interaction.createdTimestamp;
 		const { foodBar, foodStatus, happinessBar, happinessStatus } =
 			michi.getStatus();
+		const knownUsers = michi.getKnownUsers();
 
 		const latencyInfo = `Meow! Latency is ${latency}ms`;
 		const michiInfo = `food: ${foodBar} | ${foodStatus}, happiness: ${happinessBar} | ${happinessStatus}`;
+		const knownUserInfo = `known users: ${knownUsers}`;
 
-		interaction.reply(`${latencyInfo}\n${michiInfo}`);
+		interaction.reply(`${latencyInfo}\n${michiInfo}\n${knownUserInfo}`);
 
 		return {
 			userId: interaction.user.id,
