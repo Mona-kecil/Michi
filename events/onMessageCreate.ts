@@ -23,7 +23,7 @@ export default {
 		const [mention, ...chat] = message.content.split(' ');
 		const userMessage = chat.join(' ');
 
-		const response = await michi.chat(userMessage, mention);
+		const response = await michi.chat(userMessage, message.author.username);
 
 		if (response.refusal) {
 			await message.reply('Gaboleh ngomong gitu sama michii');

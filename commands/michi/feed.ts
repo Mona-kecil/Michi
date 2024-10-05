@@ -48,7 +48,6 @@ export default {
 		interaction.deferReply();
 		const response = await michi.feed(food, interaction.user.username);
 		interaction.editReply(response!);
-		interaction.followUp(JSON.stringify(michi.getStatus()));
 
 		return {
 			userId: interaction.user.id,
