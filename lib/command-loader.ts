@@ -33,6 +33,12 @@ for (const folder of commandFolders) {
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN!);
 
+const guildIds = [
+	'1063070984409727037',
+	'840099499086970910',
+	'1015881456763019264',
+];
+
 export default async function loadCommands(guildId: string) {
 	try {
 		await rest.put(
@@ -47,4 +53,6 @@ export default async function loadCommands(guildId: string) {
 	return 'Successfully loaded commands';
 }
 
-console.log(await loadCommands('1063070984409727037'));
+for (const guildId of guildIds) {
+	loadCommands(guildId);
+}

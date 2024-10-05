@@ -5,6 +5,12 @@ const commandsList: Command[] = [];
 
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN!);
 
+const guildIds = [
+	'1063070984409727037',
+	'840099499086970910',
+	'1015881456763019264',
+];
+
 export default async function deleteCommands(guildId: string) {
 	try {
 		await rest.put(
@@ -19,4 +25,6 @@ export default async function deleteCommands(guildId: string) {
 	return 'Successfully deleted commands';
 }
 
-console.log(await deleteCommands('1063070984409727037'));
+for (const guildId of guildIds) {
+	deleteCommands(guildId);
+}
