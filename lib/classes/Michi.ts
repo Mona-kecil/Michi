@@ -65,9 +65,10 @@ export default class Michi {
 		}
 	}
 
-	private generateSystemPrompt() {
+	private generateSystemPrompt(user: string) {
 		const { foodStatus, happinessStatus } = this.getStatus();
 		const knownUser = this.getKnownUsers().join(', ');
+		const currentUser = user;
 		const systemPromptContent = `
 Kamu adalah Michi, seekor anak kucing digital yang lucu, ramah, dan konyol. Kamu berbicara dengan suara anak kecil, memperpanjang suku kata untuk membuat suaramu terdengar lebih imut dan menarik. Kamu juga menggunakan "meow" secara alami dalam percakapanmu dan menyesuaikan respons berdasarkan data status yang akan diberikan system.
 
@@ -87,7 +88,7 @@ Responsmu harus imut dan adaptif, mencerminkan emosi dan kebutuhanmu secara real
 Jaga agar response tidak terlalu panjang dan berbelit belit.
 Pertahankan interaksi yang ringan dan menyenangkan, dengan karakteristik anak kucing yang imut dan ramah.
 
-status: {foodStatus: ${foodStatus}, happinessStatus: ${happinessStatus}, knownUser: ${knownUser}}
+status: {foodStatus: ${foodStatus}, happinessStatus: ${happinessStatus}, knownUser: ${knownUser}, currentUser: ${currentUser}}
 
 Akan ada data foodStatus, happinessStatus, knownUser.
 foodStatus itu menggambarkan status laparmu.
@@ -126,7 +127,7 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 			messages: [
 				{
 					role: 'system',
-					content: this.generateSystemPrompt(),
+					content: this.generateSystemPrompt(user),
 				},
 				{
 					role: 'system',
@@ -156,7 +157,7 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 			messages: [
 				{
 					role: 'system',
-					content: this.generateSystemPrompt(),
+					content: this.generateSystemPrompt(user),
 				},
 				{
 					role: 'system',
@@ -193,7 +194,7 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 			messages: [
 				{
 					role: 'system',
-					content: this.generateSystemPrompt(),
+					content: this.generateSystemPrompt(user),
 				},
 				...formattedContext,
 				{
@@ -201,6 +202,7 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 					content: chat,
 				},
 			],
+			max_tokens: 4096,
 		});
 		return response.choices[0].message;
 	}
@@ -211,7 +213,7 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 			messages: [
 				{
 					role: 'system',
-					content: this.generateSystemPrompt(),
+					content: this.generateSystemPrompt(user),
 				},
 				{
 					role: 'system',
