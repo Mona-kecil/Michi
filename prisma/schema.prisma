@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Log all interactions with the bot
+model Log {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  userMessage String
+  botResponse String
+  createdAt   DateTime @default(now())
+}
+
+// Store michi's state in the database, in case of restart
+model Michi {
+  id          Int      @id @default(autoincrement())
+  foodBar Int
+  foodStatus String
+  happinessBar Int
+  happinessStatus String
+  knownUsers String[]
+  createdAt DateTime @default(now())
+}

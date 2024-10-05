@@ -1,0 +1,21 @@
+{
+  "name": "michi",
+  "module": "app.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run app.ts",
+    "reload_commands": "bun run command-deleter.ts && bun run app.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^5.20.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "discord.js": "^14.16.3",
+    "openai": "^4.67.1"
+  }
+}
