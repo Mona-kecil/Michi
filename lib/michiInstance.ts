@@ -26,7 +26,7 @@ const michi = new Michi(
 
 export default michi;
 
-// Backup state every 4 hours
+// Backup state every 2 hours
 setInterval(() => {
 	const status = michi.getStatus();
 	const knownUsers = michi.getKnownUsers();
@@ -37,4 +37,4 @@ setInterval(() => {
 		status.happinessStatus,
 		knownUsers
 	);
-}, 1000 * 60 * 60 * 4);
+}, 1000 * 60 * 60 * 2);

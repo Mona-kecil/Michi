@@ -39,7 +39,7 @@ const guildIds = [
 	'1015881456763019264',
 ];
 
-export default async function loadCommands(guildId: string) {
+async function loadCommands(guildId: string) {
 	try {
 		await rest.put(
 			Routes.applicationGuildCommands(process.env.APP_ID!, guildId),
@@ -53,6 +53,15 @@ export default async function loadCommands(guildId: string) {
 	return 'Successfully loaded commands';
 }
 
-for (const guildId of guildIds) {
-	loadCommands(guildId);
-}
+(async () => {
+	try {
+		for (const guildId of guildIds) {
+			console.log(await loadCommands(guildId));
+		}
+	} catch (error) {
+		console.error(error);
+		process.exit(1);
+	} finally {
+		process.exit(0);
+	}
+})();

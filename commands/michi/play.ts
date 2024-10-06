@@ -35,11 +35,11 @@ export default {
 		);
 
 		if (!activity) {
-			await interaction.reply('Yaaahh, mainnya abis nih..');
+			await interaction.reply('Yaaahh, mainannya lagi gaada nih..');
 			return {
 				userId: interaction.user.id,
 				userMessage: 'Main michi!',
-				botResponse: `Yaaahh, mainnya lagi abis nih..`,
+				botResponse: `Yaaahh, mainannya lagi gaada nih..`,
 			};
 		}
 
@@ -49,7 +49,7 @@ export default {
 
 		return {
 			userId: interaction.user.id,
-			userMessage: 'Main sama michi!',
+			userMessage: 'Main michi!',
 			botResponse: response!,
 		};
 	},
