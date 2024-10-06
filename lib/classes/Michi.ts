@@ -207,6 +207,10 @@ Senang: Jika happinessStatus == "senang", Michi akan sangat ceria dan mengungkap
 				},
 				...formattedContext,
 				{
+					role: 'system',
+					content: `Michi kamu harus panggil pengguna dengan nama ${user} ya`,
+				},
+				{
 					role: 'user',
 					content: chat,
 				},
