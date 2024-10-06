@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run app.ts",
-    "reload_commands": "bun run command-deleter.ts && bun run app.ts"
+    "reload_commands": "bun run lib/command-deleter.ts && bun run lib/command-loader.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
