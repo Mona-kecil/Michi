@@ -2,12 +2,19 @@ import { Events, Message } from 'discord.js';
 import michi from '../lib/michiInstance.ts';
 import { createLog } from '../controllers/dbControllers.ts';
 
+const greetings = [
+	"pagi",
+	"siang",
+	"sore",
+	"malam"
+]
+
 export default {
 	name: Events.MessageCreate,
 	async execute(message: Message) {
 		if (message.author.bot) return;
-
-		if (message.content.includes('pagi')) {
+			
+		if (greetings.some(greeting => message.content.toLowerCase().includes(greeting))) {
 			const response = await michi.chatPagi(
 				message.content,
 				message.author.username

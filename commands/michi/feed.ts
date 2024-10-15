@@ -4,11 +4,11 @@ import Food from '../../lib/classes/Food';
 import type { Log } from '../../lib/types/Log';
 
 const foodList: Food[] = [
-	new Food('Tuna', 30),
+	new Food('Tuna', 50),
 	new Food('Chicken', 25),
-	new Food('Salmon', 30),
+	new Food('Salmon', 50),
 	new Food('Telur Rebus', 20),
-	new Food('Royal Canin', 25),
+	new Food('Royal Canin', 80),
 	new Food('Snack', 5),
 ];
 

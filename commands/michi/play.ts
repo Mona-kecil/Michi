@@ -4,10 +4,10 @@ import Activity from '../../lib/classes/Activity';
 import type { Log } from '../../lib/types/Log';
 
 const activityList: Activity[] = [
-	new Activity('Bola', 10),
-	new Activity('Tongkat Pancing', 20),
-	new Activity('Catnip', 30),
-	new Activity('Lampu Laser', 40),
+	new Activity('Bola', 40),
+	new Activity('Tongkat Pancing', 50),
+	new Activity('Catnip', 80),
+	new Activity('Lampu Laser', 60),
 	new Activity('Cat Tree', 50),
 ];
 
